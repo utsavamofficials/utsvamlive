@@ -131,7 +131,7 @@ function EventManagerNewDonationForm() {
           eventId: user.eventId,
           collectionExecutiveId: user.id,
         });
-        donorId = created.id;
+        donorId = created._id;
       }
 
       console.log(donorId)
