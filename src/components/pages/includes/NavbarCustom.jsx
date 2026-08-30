@@ -85,8 +85,9 @@ function NavbarCustom() {
                 Sign in
               </Link>
 
-              <Link className="btn btn-started" to="/signup">
-                Get Started
+              <Link className="btn btn-started" 
+              to="https://wa.me/919923980463?text=Hi%20there%2C%20I%20want%20to%20know%20more%20about%20Utsavam%2C%20please%20help%20me%20out">
+                Connect Us
                 <ArrowRight size={15} />
               </Link>
 
