@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import Reveal from "./Reveal";
 import { usePWAInstall } from "../../hooks/usePWAInstall";
+import { Link } from "lucide-react";
 
 /* ============================================================
    Hero image
@@ -76,8 +77,14 @@ const Hero = () => {
             <Reveal>
               {/* Launch Badge */}
               <div className="u-hero-badge">
-                <span className="u-dot" />
-                Now launching for Ganesh Mandals
+                <a
+                  href="https://mkfusion.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="u-dot" />
+                  Powered by MKFusion
+                </a>
               </div>
 
               {/* Main Heading */}

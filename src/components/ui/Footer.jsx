@@ -34,14 +34,24 @@ const Footer = () => {
           <div className="col-6 col-lg-3 u-footer-col">
             <h5>Contact</h5>
             <ul>
-              <li><a href="#join">Register your Mandal</a></li>
-              <li><a href="mailto:hello@utsavam.in">hello@utsavam.in</a></li>
-              <li><a href="tel:+910000000000">+91 00000 00000</a></li>
+              <li>
+                <a
+                  href={`https://wa.me/919923980463?text=${encodeURIComponent(
+                    "Hello! I’ve gone through the Utsavam portal and I’m interested in registering my Mandal with the Utsavam application. Could you please guide me through the registration process and next steps? Thank you!"
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Register your Mandal
+                </a>
+              </li>
+              <li><a href="mailto:utsavamofficials@gmail.com">utsavamofficials@gmail.com</a></li>
+              <li><a href="tel:+91 99239 80463">+91 99239 80463</a></li>
             </ul>
           </div>
         </div>
         <div className="u-footer-bottom">
-          <span className="u-footer-copy">© 2026 UTSAVAM. Built with pride for Ganesh Utsav.</span>
+          <span className="u-footer-copy">© 2026 UTSAVAM. Powered By <a href='https://mkfusion.in'>MKFusion</a>.</span>
           <div className="u-footer-social">
             <a href="#" aria-label="Instagram"><Icon path={<><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" /></>} size={16} /></a>
             <a href="#" aria-label="Facebook"><Icon path={<path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.5.5-1 1-1z" />} size={16} /></a>
