@@ -121,7 +121,7 @@ function NavbarCustom() {
             className="btn btn-started mobile-start-btn"
             onClick={() => setMenuOpen(false)}
           >
-            Get Started
+            Connect Me
             <ArrowRight size={16} />
           </Link>
 
