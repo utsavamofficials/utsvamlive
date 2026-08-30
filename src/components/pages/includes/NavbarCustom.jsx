@@ -37,9 +37,8 @@ function NavbarCustom() {
     <header className="navbar-wrapper">
 
       <nav
-        className={`navbar navbar-expand-lg navbar-custom ${
-          scrolled ? "navbar-scrolled" : ""
-        }`}
+        className={`navbar navbar-expand-lg navbar-custom ${scrolled ? "navbar-scrolled" : ""
+          }`}
       >
         <div className="container-fluid">
 
@@ -103,8 +102,8 @@ function NavbarCustom() {
         <div className="mobile-drawer d-lg-none">
 
           {[...NAV_LINKS,
-            { label: "Contact", to: "/contact" },
-            { label: "Sign in", to: "/signin" },
+          { label: "Contact", to: "/contact" },
+          { label: "Sign in", to: "/signin" },
           ].map((item) => (
             <Link
               key={item.to}
@@ -117,11 +116,11 @@ function NavbarCustom() {
           ))}
 
           <Link
-            to="/signup"
+            to="https://wa.me/919923980463?text=Hi%20there%2C%20I%20want%20to%20know%20more%20about%20Utsavam%2C%20please%20help%20me%20out"
             className="btn btn-started mobile-start-btn"
             onClick={() => setMenuOpen(false)}
           >
-            Connect Me
+            Connect Us
             <ArrowRight size={16} />
           </Link>
 
