@@ -308,7 +308,7 @@ function EventManagerProfile() {
               <div className="list-group list-group-flush mb-4">
                 <a
                   href="/privacy-policy"
-                  target="_blank"
+                  target="_self"
                   rel="noreferrer"
                   className="list-group-item list-group-item-action border-0 px-0 py-3 d-flex align-items-center justify-content-between"
                 >
@@ -325,7 +325,7 @@ function EventManagerProfile() {
 
                 <a
                   href="/terms-of-use"
-                  target="_blank"
+                  target="_self"
                   rel="noreferrer"
                   className="list-group-item list-group-item-action border-0 px-0 py-3 d-flex align-items-center justify-content-between"
                 >

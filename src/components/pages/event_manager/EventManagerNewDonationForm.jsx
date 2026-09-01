@@ -347,7 +347,7 @@ function EventManagerNewDonationForm() {
                     contact number, email and address are being collected for
                     donation, receipt and accounting purposes, and that they
                     consent to this in accordance with the{" "}
-                    <a href="/privacy-policy" target="_blank" rel="noreferrer">
+                    <a href="/privacy-policy" target="_self" rel="noreferrer">
                       Privacy Policy
                     </a>
                     .

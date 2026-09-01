@@ -16,7 +16,7 @@ const EventCard = ({ image, title, description, address, link }) => {
                         <span className="fw-semibold">Address:</span> {address}
                     </p>
                     <p className="card-text">
-                        <a href={link} target="_blank" rel="noopener noreferrer">Follow link</a>
+                        <a href={link} target="_self" rel="noopener noreferrer">Follow link</a>
                     </p>
                 </div>
             </div>

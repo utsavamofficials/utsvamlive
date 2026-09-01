@@ -221,7 +221,7 @@ function EventManagerHome() {
                     <td>
                       <Link
                         to={`/doner/${row.donation.receiptNumber}/receipt`}
-                        target="_blank"
+                        target="_self"
                         className="btn btn-sm border-primary text-primary"
                       >
                         View

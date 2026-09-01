@@ -310,7 +310,7 @@ function EventManagerRevenueReport() {
                     <td>
                       <Link
                         to={`/doner/${item.donation.receiptNumber}/receipt`}
-                        target="_blank"
+                        target="_self"
                         className="btn border-primary text-primary btn-sm"
                       >
                         View
