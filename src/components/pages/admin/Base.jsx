@@ -12,7 +12,6 @@ function Base() {
             <AdminSidebar />
             <div
                 className="main-wrapper flex-grow-1"
-                data-aos="fade-up"
             >
                 <Outlet /> {/* This will render nested route components */}
             </div>

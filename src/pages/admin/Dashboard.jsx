@@ -143,7 +143,7 @@ function Dashboard() {
       <div className="d-none">{/* Hidden dashboard sections */}</div>
 
       {/* Quick Actions */}
-      <div className="row" data-aos="fade-up">
+      <div className="row d-none" data-aos="fade-up">
         <div className="col-12">
           <h6 className="fw-bold mb-3">Quick Actions</h6>
         </div>
