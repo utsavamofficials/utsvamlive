@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../assets/utsavamLogoBeside.png';
+import { Collapse } from 'bootstrap';
 
 const NAV_ITEMS = [
     { to: '/em/dashboard', label: 'Dashboard', icon: 'bi-speedometer2' },
@@ -12,6 +13,18 @@ const NAV_ITEMS = [
 
 function UserNavbar() {
     const location = useLocation();
+
+    useEffect(() => {
+        const navbarElement = document.getElementById('navbarResponsive');
+
+        if (!navbarElement) return;
+
+        const collapse = Collapse.getInstance(navbarElement);
+
+        if (collapse) {
+            collapse.hide();
+        }
+    }, [location.pathname]);
 
     return (
         <div className="container">

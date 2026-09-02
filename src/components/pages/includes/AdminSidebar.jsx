@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Offcanvas } from 'bootstrap';
 import logo from '../../../assets/UtsavamLogoMain.png';
 import { Link, useLocation } from "react-router-dom";
 
@@ -18,7 +19,20 @@ const NAV_ITEMS = [
 
 function AdminSidebar() {
     const location = useLocation();
+
     const isActive = (to) => location.pathname.includes(to);
+
+    useEffect(() => {
+        const offcanvasElement = document.getElementById('offcanvasSidebar');
+
+        if (!offcanvasElement) return;
+
+        const offcanvas = Offcanvas.getInstance(offcanvasElement);
+
+        if (offcanvas) {
+            offcanvas.hide();
+        }
+    }, [location.pathname]);
 
     return (
         <>
