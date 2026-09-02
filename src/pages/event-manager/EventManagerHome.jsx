@@ -127,7 +127,7 @@ function EventManagerHome() {
       )}
 
       <div className="row">
-        <div className="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+        <div className="col-lg-4 col-md-6 mb-4">
           {loading ? (
             <div
               className="ep-skeleton ep-skeleton-card"
@@ -151,7 +151,7 @@ function EventManagerHome() {
           </div>
         </div>
 
-        <div className="col-lg-8 col-md-6 mb-4" data-aos="fade-up">
+        <div className="col-lg-8 col-md-6 mb-4">
           <div className="ep-chart-card h-100">
             <h6 className="fw-bold mb-3">This Week's Donations</h6>
             <BarChart data={weeklyData} formatValue={(v) => `${v} receipts`} />
@@ -159,7 +159,7 @@ function EventManagerHome() {
         </div>
       </div>
 
-      <div className="ep-datatable-card" data-aos="fade-up">
+      <div className="ep-datatable-card">
         <div className="ep-datatable-toolbar">
           <h6 className="fw-bold mb-0">Recently Added</h6>
           <div className="ep-datatable-search">

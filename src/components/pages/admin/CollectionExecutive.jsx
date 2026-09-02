@@ -432,7 +432,7 @@ function CollectionExecutive() {
 
 function Stat({ title, value, icon, tone }) {
   return (
-    <div className="col-lg-4 col-md-6" data-aos="fade-up">
+    <div className="col-lg-4 col-md-6 col-sm-6 " data-aos="fade-up">
       <div className={`ep-stat-mini ep-stat-mini--${tone}`}>
         <div className="ep-stat-mini__icon">
           <i className={`bi ${icon}`} />
