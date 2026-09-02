@@ -109,7 +109,7 @@ function EventManagerHome() {
   }, [recent, search]);
 
   return (
-    <div className="wrap-content h-100 w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
+    <div className="wrap-content donor-scroll-box h-100 w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
       <div className="ep-festive-banner mb-4" data-aos="fade-up">
         <h4 className="fw-bold mb-1 position-relative">🪔 Welcome back</h4>
         <p className="mb-0 opacity-90 position-relative">
