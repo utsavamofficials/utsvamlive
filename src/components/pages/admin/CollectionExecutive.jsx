@@ -60,7 +60,7 @@ function CollectionExecutive() {
       setLoading(true);
       const response = await collectionExecutivesApi.list({
         eventOrganizerId: user.id || undefined,
-        seasonId : user.seasonId || undefined
+        seasonId: user.seasonId || undefined
       });
       const data = Array.isArray(response)
         ? response
@@ -147,268 +147,271 @@ function CollectionExecutive() {
   const disabledCount = collectors.length - activeCount;
 
   return (
-    <div className="wrap-content h-auto w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
-      <div className="ep-festive-banner mb-4" data-aos="fade-up">
-        <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
-          <div>
-            <h4 className="fw-bold mb-1 position-relative">
-              🪔 Donation Collectors
-            </h4>
-            <p className="mb-0 opacity-90 position-relative">
-              Manage collection executives assigned to your festival event.
-            </p>
-          </div>
-          <button
-            className="btn ep-action-btn ep-action-btn--indigo"
-            onClick={() => navigate("/admin/addDCollector")}
-          >
-            <i className="bi bi-person-plus-fill me-2" />
-            Add Collector
-          </button>
-        </div>
-      </div>
-
-      <div className="row g-3 mb-4">
-        <Stat
-          title="Total Collectors"
-          value={collectors.length}
-          icon="bi-people-fill"
-          tone="indigo"
-        />
-        <Stat
-          title="Active Collectors"
-          value={activeCount}
-          icon="bi-person-check-fill"
-          tone="teal"
-        />
-        <Stat
-          title="Disabled"
-          value={disabledCount}
-          icon="bi-person-slash"
-          tone="amber"
-        />
-      </div>
-
-      <div className="ep-chart-card" data-aos="fade-up">
-        <div className="row g-3 align-items-end mb-4">
-          <div className="col-lg-7 col-md-6">
-            <label className="form-label fw-semibold">Search Collectors</label>
-            <div className="ep-search-box">
-              <i className="bi bi-search" />
-              <input
-                className="form-control"
-                placeholder="Search by name, username, email or contact..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              {search && (
-                <button
-                  className="ep-search-clear"
-                  onClick={() => setSearch("")}
-                >
-                  <i className="bi bi-x" />
-                </button>
-              )}
+    <>
+      <div className="wrap-content h-auto w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
+        <div className="ep-festive-banner mb-4" data-aos="fade-up">
+          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+              <h4 className="fw-bold mb-1 position-relative">
+                🪔 Donation Collectors
+              </h4>
+              <p className="mb-0 opacity-90 position-relative">
+                Manage collection executives assigned to your festival event.
+              </p>
             </div>
-          </div>
-
-          <div className="col-lg-3 col-md-3">
-            <label className="form-label fw-semibold">Status</label>
-            <select
-              className="form-select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-              <option value="all">All Collectors</option>
-              <option value="active">Active</option>
-              <option value="disabled">Disabled</option>
-            </select>
-          </div>
-
-          <div className="col-lg-2 col-md-3">
             <button
-              className="btn ep-refresh-btn w-100"
-              onClick={loadCollectors}
-              disabled={loading}
+              className="btn ep-action-btn ep-action-btn--indigo"
+              onClick={() => navigate("/admin/addDCollector")}
             >
-              <i
-                className={`bi ${loading ? "bi-arrow-repeat ep-spin" : "bi-arrow-clockwise"} me-2`}
-              />
-              Refresh
+              <i className="bi bi-person-plus-fill me-2" />
+              Add Collector
             </button>
           </div>
         </div>
 
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <div>
-            <h6 className="fw-bold mb-1">Collection Executives</h6>
-            <span className="text-muted small">
-              {filtered.length} collector(s)
-            </span>
-          </div>
-          {(search || statusFilter !== "all") && (
-            <button
-              className="btn btn-sm ep-clear-filter"
-              onClick={() => {
-                setSearch("");
-                setStatusFilter("all");
-              }}
-            >
-              <i className="bi bi-x-circle me-1" /> Clear Filters
-            </button>
-          )}
+        <div className="row g-3 mb-4">
+          <Stat
+            title="Total Collectors"
+            value={collectors.length}
+            icon="bi-people-fill"
+            tone="indigo"
+          />
+          <Stat
+            title="Active Collectors"
+            value={activeCount}
+            icon="bi-person-check-fill"
+            tone="teal"
+          />
+          <Stat
+            title="Disabled"
+            value={disabledCount}
+            icon="bi-person-slash"
+            tone="amber"
+          />
         </div>
 
-        {loading ? (
-          <Skeleton />
-        ) : rows.length === 0 ? (
-          <div className="ep-empty-state">
-            <div className="ep-empty-state__icon">
-              <i className="bi bi-people" />
+        <div className="ep-chart-card" data-aos="fade-up">
+          <div className="row g-3 align-items-end mb-4">
+            <div className="col-lg-7 col-md-6">
+              <label className="form-label fw-semibold">Search Collectors</label>
+              <div className="ep-search-box">
+                <i className="bi bi-search" />
+                <input
+                  className="form-control"
+                  placeholder="Search by name, username, email or contact..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                {search && (
+                  <button
+                    className="ep-search-clear"
+                    onClick={() => setSearch("")}
+                  >
+                    <i className="bi bi-x" />
+                  </button>
+                )}
+              </div>
             </div>
-            <h6 className="fw-bold">No collectors found</h6>
-            <p className="text-muted small">
-              Try changing your search/filter or create a new collector.
-            </p>
+
+            <div className="col-lg-3 col-md-3">
+              <label className="form-label fw-semibold">Status</label>
+              <select
+                className="form-select"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="all">All Collectors</option>
+                <option value="active">Active</option>
+                <option value="disabled">Disabled</option>
+              </select>
+            </div>
+
+            <div className="col-lg-2 col-md-3">
+              <button
+                className="btn ep-refresh-btn w-100"
+                onClick={loadCollectors}
+                disabled={loading}
+              >
+                <i
+                  className={`bi ${loading ? "bi-arrow-repeat ep-spin" : "bi-arrow-clockwise"} me-2`}
+                />
+                Refresh
+              </button>
+            </div>
           </div>
-        ) : (
-          <>
-            <div className="table-responsive">
-              <table className="table ep-data-table align-middle mb-0">
-                <thead>
-                  <tr>
-                    <th>Collector</th>
-                    <th>Contact</th>
-                    <th>Age</th>
-                    <th>Status</th>
-                    <th className="text-end">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.map((collector) => (
-                    <tr
-                      key={collector.id}
-                      className={!collector.isActive ? "ep-row-disabled" : ""}
-                    >
-                      <td>
-                        <div className="d-flex align-items-center gap-3">
-                          <div className="ep-avatar ep-avatar--indigo">
-                            {collector.fullName
-                              .split(" ")
-                              .map((x) => x[0])
-                              .slice(0, 2)
-                              .join("")
-                              .toUpperCase() || "DC"}
-                          </div>
-                          <div>
-                            <div className="fw-semibold">
-                              {collector.fullName}
+
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h6 className="fw-bold mb-1">Collection Executives</h6>
+              <span className="text-muted small">
+                {filtered.length} collector(s)
+              </span>
+            </div>
+            {(search || statusFilter !== "all") && (
+              <button
+                className="btn btn-sm ep-clear-filter"
+                onClick={() => {
+                  setSearch("");
+                  setStatusFilter("all");
+                }}
+              >
+                <i className="bi bi-x-circle me-1" /> Clear Filters
+              </button>
+            )}
+          </div>
+
+          {loading ? (
+            <Skeleton />
+          ) : rows.length === 0 ? (
+            <div className="ep-empty-state">
+              <div className="ep-empty-state__icon">
+                <i className="bi bi-people" />
+              </div>
+              <h6 className="fw-bold">No collectors found</h6>
+              <p className="text-muted small">
+                Try changing your search/filter or create a new collector.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="table-responsive">
+                <table className="table ep-data-table align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th>Collector</th>
+                      <th>Contact</th>
+                      <th>Age</th>
+                      <th>Status</th>
+                      <th className="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((collector) => (
+                      <tr
+                        key={collector.id}
+                        className={!collector.isActive ? "ep-row-disabled" : ""}
+                      >
+                        <td>
+                          <div className="d-flex align-items-center gap-3">
+                            <div className="ep-avatar ep-avatar--indigo">
+                              {collector.fullName
+                                .split(" ")
+                                .map((x) => x[0])
+                                .slice(0, 2)
+                                .join("")
+                                .toUpperCase() || "DC"}
                             </div>
-                            <div className="small text-muted">
-                              @{collector.username}
+                            <div>
+                              <div className="fw-semibold">
+                                {collector.fullName}
+                              </div>
+                              <div className="small text-muted">
+                                @{collector.username}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="small fw-semibold">
-                          {collector.contactNumber || "—"}
-                        </div>
-                        <div className="small text-muted">
-                          {collector.email || "—"}
-                        </div>
-                      </td>
-                      <td>{collector.age || "—"}</td>
-                      <td>
-                        <span
-                          className={`ep-status ${collector.isActive ? "ep-status--active" : "ep-status--disabled"}`}
-                        >
-                          <span /> {collector.isActive ? "Active" : "Disabled"}
-                        </span>
-                      </td>
-                      <td>
-                        <div className="d-flex justify-content-end gap-2">
-                          <button
-                            className="btn ep-icon-btn ep-icon-btn--view"
-                            title="View"
-                            onClick={() => setViewCollector(collector)}
+                        </td>
+                        <td>
+                          <div className="small fw-semibold">
+                            {collector.contactNumber || "—"}
+                          </div>
+                          <div className="small text-muted">
+                            {collector.email || "—"}
+                          </div>
+                        </td>
+                        <td>{collector.age || "—"}</td>
+                        <td>
+                          <span
+                            className={`ep-status ${collector.isActive ? "ep-status--active" : "ep-status--disabled"}`}
                           >
-                            <i className="bi bi-eye" />
-                          </button>
-                          {/* Fixed route mismatch: this used to point to
+                            <span /> {collector.isActive ? "Active" : "Disabled"}
+                          </span>
+                        </td>
+                        <td>
+                          <div className="d-flex justify-content-end gap-2">
+                            <button
+                              className="btn ep-icon-btn ep-icon-btn--view"
+                              title="View"
+                              onClick={() => setViewCollector(collector)}
+                            >
+                              <i className="bi bi-eye" />
+                            </button>
+                            {/* Fixed route mismatch: this used to point to
                               /donation-collectors/edit/:id, which was never
                               a registered route (see AppRoutes.jsx) — the
                               actual edit screen lives under /admin/addDCollector/:id */}
-                          <button
-                            className="btn ep-icon-btn ep-icon-btn--edit"
-                            title="Edit"
-                            onClick={() =>
-                              navigate(`/admin/addDCollector/${collector.id}`)
-                            }
-                          >
-                            <i className="bi bi-pencil" />
-                          </button>
-                          <button
-                            className={`btn ep-icon-btn ${collector.isActive ? "ep-icon-btn--disable" : "ep-icon-btn--enable"}`}
-                            title={collector.isActive ? "Disable" : "Enable"}
-                            onClick={() =>
-                              setConfirm({ type: "toggle", collector })
-                            }
-                            disabled={actionLoading === collector.id}
-                          >
-                            <i
-                              className={`bi ${collector.isActive ? "bi-person-slash" : "bi-person-check"}`}
-                            />
-                          </button>
-                          <button
-                            className="btn ep-icon-btn ep-icon-btn--delete"
-                            title="Delete"
-                            onClick={() =>
-                              setConfirm({ type: "delete", collector })
-                            }
-                            disabled={actionLoading === collector.id}
-                          >
-                            <i className="bi bi-trash3" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {totalPages > 1 && (
-              <div className="ep-pagination">
-                <button
-                  className="ep-page-btn"
-                  disabled={page === 1}
-                  onClick={() => setPage(page - 1)}
-                >
-                  <i className="bi bi-chevron-left" />
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (p) => (
-                    <button
-                      key={p}
-                      className={`ep-page-btn ${page === p ? "ep-page-btn--active" : ""}`}
-                      onClick={() => setPage(p)}
-                    >
-                      {p}
-                    </button>
-                  ),
-                )}
-                <button
-                  className="ep-page-btn"
-                  disabled={page === totalPages}
-                  onClick={() => setPage(page + 1)}
-                >
-                  <i className="bi bi-chevron-right" />
-                </button>
+                            <button
+                              className="btn ep-icon-btn ep-icon-btn--edit"
+                              title="Edit"
+                              onClick={() =>
+                                navigate(`/admin/addDCollector/${collector.id}`)
+                              }
+                            >
+                              <i className="bi bi-pencil" />
+                            </button>
+                            <button
+                              className={`btn ep-icon-btn ${collector.isActive ? "ep-icon-btn--disable" : "ep-icon-btn--enable"}`}
+                              title={collector.isActive ? "Disable" : "Enable"}
+                              onClick={() =>
+                                setConfirm({ type: "toggle", collector })
+                              }
+                              disabled={actionLoading === collector.id}
+                            >
+                              <i
+                                className={`bi ${collector.isActive ? "bi-person-slash" : "bi-person-check"}`}
+                              />
+                            </button>
+                            <button
+                              className="btn ep-icon-btn ep-icon-btn--delete"
+                              title="Delete"
+                              onClick={() =>
+                                setConfirm({ type: "delete", collector })
+                              }
+                              disabled={actionLoading === collector.id}
+                            >
+                              <i className="bi bi-trash3" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            )}
-          </>
-        )}
+
+              {totalPages > 1 && (
+                <div className="ep-pagination">
+                  <button
+                    className="ep-page-btn"
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                  >
+                    <i className="bi bi-chevron-left" />
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <button
+                        key={p}
+                        className={`ep-page-btn ${page === p ? "ep-page-btn--active" : ""}`}
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </button>
+                    ),
+                  )}
+                  <button
+                    className="ep-page-btn"
+                    disabled={page === totalPages}
+                    onClick={() => setPage(page + 1)}
+                  >
+                    <i className="bi bi-chevron-right" />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
       </div>
 
       {viewCollector && (
@@ -426,7 +429,8 @@ function CollectionExecutive() {
           onConfirm={confirm.type === "delete" ? handleDelete : handleToggle}
         />
       )}
-    </div>
+    </>
+
   );
 }
 

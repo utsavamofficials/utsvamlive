@@ -65,7 +65,7 @@ function AdminSidebar() {
                         </li>
                     ))}
                     <li className="nav-item mt-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                        <Link className="ep-nav-link" to="policies">
+                        <Link className="ep-nav-link" to="/policies">
                             <i className="bi bi-shield"></i> Privacy Policies
                         </Link>
                     </li>

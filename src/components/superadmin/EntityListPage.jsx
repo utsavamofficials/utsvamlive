@@ -419,249 +419,250 @@ export default function EntityListPage({
   };
 
   return (
-    <div className="wrap-content h-auto w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
-      <div className="ep-festive-banner mb-4">
-        <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
-          <div>
-            <h4 className="fw-bold mb-1 position-relative">
-              <i className={`bi ${icon} me-2`}></i>
-              {title}
-            </h4>
-            {description && (
-              <p className="mb-0 opacity-90 position-relative">{description}</p>
-            )}
-          </div>
-          <button
-            type="button"
-            className="btn ep-action-btn ep-action-btn--indigo"
-            onClick={() => {
-              openCreate();
-            }}
-            disabled={saving || !canCreate}
-          >
-            <i className="bi bi-plus-circle me-2" />
-            Add {singularTitle}
-          </button>
-        </div>
-      </div>
-
-      <div className="ep-chart-card">
-        <div className="row g-3 align-items-end mb-4">
-          <div className="col-lg-8 col-md-6">
-            <label className="form-label fw-semibold">Search</label>
-            <div className="ep-search-box">
-              <i className="bi bi-search" />
-              <input
-                className="form-control"
-                placeholder="Search..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              {search && (
-                <button
-                  type="button"
-                  className="ep-search-clear"
-                  onClick={() => setSearch("")}
-                >
-                  <i className="bi bi-x" />
-                </button>
+    <>
+      <div className="wrap-content h-auto w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
+        <div className="ep-festive-banner mb-4">
+          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+              <h4 className="fw-bold mb-1 position-relative">
+                <i className={`bi ${icon} me-2`}></i>
+                {title}
+              </h4>
+              {description && (
+                <p className="mb-0 opacity-90 position-relative">{description}</p>
               )}
             </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
             <button
               type="button"
-              className="btn ep-refresh-btn w-100"
-              onClick={load}
-              disabled={loading}
+              className="btn ep-action-btn ep-action-btn--indigo"
+              onClick={() => {
+                openCreate();
+              }}
+              disabled={saving || !canCreate}
             >
-              <i
-                className={`bi ${loading ? "bi-arrow-repeat ep-spin" : "bi-arrow-clockwise"} me-2`}
-              />
-              Refresh
+              <i className="bi bi-plus-circle me-2" />
+              Add {singularTitle}
             </button>
           </div>
         </div>
 
-        {loading ? (
-          <div className="py-5 text-center text-muted">
-            <span className="spinner-border spinner-border-sm me-2" /> Loading{" "}
-            {String(title || "records").toLowerCase()}...
+        <div className="ep-chart-card">
+          <div className="row g-3 align-items-end mb-4">
+            <div className="col-lg-8 col-md-6">
+              <label className="form-label fw-semibold">Search</label>
+              <div className="ep-search-box">
+                <i className="bi bi-search" />
+                <input
+                  className="form-control"
+                  placeholder="Search..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                {search && (
+                  <button
+                    type="button"
+                    className="ep-search-clear"
+                    onClick={() => setSearch("")}
+                  >
+                    <i className="bi bi-x" />
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-6">
+              <button
+                type="button"
+                className="btn ep-refresh-btn w-100"
+                onClick={load}
+                disabled={loading}
+              >
+                <i
+                  className={`bi ${loading ? "bi-arrow-repeat ep-spin" : "bi-arrow-clockwise"} me-2`}
+                />
+                Refresh
+              </button>
+            </div>
           </div>
-        ) : loadError ? (
-          <div className="alert alert-danger d-flex justify-content-between align-items-center">
-            <span>
-              <i className="bi bi-exclamation-triangle me-2" />
-              {loadError}
-            </span>
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-danger"
-              onClick={load}
-            >
-              Retry
-            </button>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-5 text-muted">
-            <i className="bi bi-inbox display-6 d-block mb-2" />
-            {rows.length === 0
-              ? emptyStateHint
-              : "No records match your search."}
-          </div>
-        ) : (
-          <>
-            <div className="table-responsive">
-              <table className="table align-middle">
-                <thead>
-                  <tr>
-                    {safeColumns.map((c) => (
-                      <th key={String(c.key)}>{c.label || c.key}</th>
-                    ))}
-                    {statusField && <th>Status</th>}
-                    <th className="text-end">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pageRows.map((row, index) => {
-                    if (!isObj(row)) return null;
 
-                    const recordId = getRowId(row, idField);
-                    const reactKey = String(recordId ?? `row-${index}`);
-                    const isActive = activationField
-                      ? row?.[activationField] === true
-                      : statusField
-                        ? row?.[statusField] === statusValues?.active
-                        : true;
-                    const rowBusy =
-                      recordId !== null && actionLoadingId === String(recordId);
+          {loading ? (
+            <div className="py-5 text-center text-muted">
+              <span className="spinner-border spinner-border-sm me-2" /> Loading{" "}
+              {String(title || "records").toLowerCase()}...
+            </div>
+          ) : loadError ? (
+            <div className="alert alert-danger d-flex justify-content-between align-items-center">
+              <span>
+                <i className="bi bi-exclamation-triangle me-2" />
+                {loadError}
+              </span>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-danger"
+                onClick={load}
+              >
+                Retry
+              </button>
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-5 text-muted">
+              <i className="bi bi-inbox display-6 d-block mb-2" />
+              {rows.length === 0
+                ? emptyStateHint
+                : "No records match your search."}
+            </div>
+          ) : (
+            <>
+              <div className="table-responsive">
+                <table className="table align-middle">
+                  <thead>
+                    <tr>
+                      {safeColumns.map((c) => (
+                        <th key={String(c.key)}>{c.label || c.key}</th>
+                      ))}
+                      {statusField && <th>Status</th>}
+                      <th className="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pageRows.map((row, index) => {
+                      if (!isObj(row)) return null;
 
-                    return (
-                      <tr key={reactKey}>
-                        {safeColumns.map((c) => {
-                          let content = "—";
-                          try {
-                            content =
-                              typeof c.render === "function"
-                                ? (c.render(row) ?? "—")
-                                : (row?.[c.key] ?? "—");
-                          } catch {
-                            content = "—";
-                          }
-                          return (
-                            <td key={`${reactKey}-${String(c.key)}`}>
-                              {content}
+                      const recordId = getRowId(row, idField);
+                      const reactKey = String(recordId ?? `row-${index}`);
+                      const isActive = activationField
+                        ? row?.[activationField] === true
+                        : statusField
+                          ? row?.[statusField] === statusValues?.active
+                          : true;
+                      const rowBusy =
+                        recordId !== null && actionLoadingId === String(recordId);
+
+                      return (
+                        <tr key={reactKey}>
+                          {safeColumns.map((c) => {
+                            let content = "—";
+                            try {
+                              content =
+                                typeof c.render === "function"
+                                  ? (c.render(row) ?? "—")
+                                  : (row?.[c.key] ?? "—");
+                            } catch {
+                              content = "—";
+                            }
+                            return (
+                              <td key={`${reactKey}-${String(c.key)}`}>
+                                {content}
+                              </td>
+                            );
+                          })}
+                          {statusField && (
+                            <td>
+                              <span
+                                className={`ep-status ${isActive ? "ep-status--active" : "ep-status--disabled"}`}
+                              >
+                                <span /> {isActive ? "Active" : "Inactive"}
+                              </span>
                             </td>
-                          );
-                        })}
-                        {statusField && (
-                          <td>
-                            <span
-                              className={`ep-status ${isActive ? "ep-status--active" : "ep-status--disabled"}`}
-                            >
-                              <span /> {isActive ? "Active" : "Inactive"}
-                            </span>
-                          </td>
-                        )}
-                        <td className="text-end">
-                          <div className="d-flex justify-content-end gap-2">
-                            <button
-                              type="button"
-                              className="btn ep-icon-btn ep-icon-btn--edit"
-                              title="Edit"
-                              onClick={() => openEdit(row)}
-                              disabled={rowBusy || saving || !canUpdate}
-                            >
-                              <i className="bi bi-pencil" />
-                            </button>
-                            {statusField && (
+                          )}
+                          <td className="text-end">
+                            <div className="d-flex justify-content-end gap-2">
                               <button
                                 type="button"
-                                className={`btn ep-icon-btn ${isActive ? "ep-icon-btn--disable" : "ep-icon-btn--enable"}`}
-                                title={isActive ? "Deactivate" : "Activate"}
-                                onClick={() => handleToggleStatus(row)}
-                                disabled={rowBusy || saving || !canToggleStatus}
+                                className="btn ep-icon-btn ep-icon-btn--edit"
+                                title="Edit"
+                                onClick={() => openEdit(row)}
+                                disabled={rowBusy || saving || !canUpdate}
                               >
-                                <i
-                                  className={`bi ${isActive ? "bi-toggle-on" : "bi-toggle-off"}`}
-                                />
+                                <i className="bi bi-pencil" />
                               </button>
-                            )}
-                            {allowDelete && (
-                              <button
-                                type="button"
-                                className="btn ep-icon-btn ep-icon-btn--delete"
-                                title="Delete"
-                                onClick={() => handleDelete(row)}
-                                disabled={rowBusy || saving || !canRemove}
-                              >
-                                <i className="bi bi-trash3" />
-                              </button>
-                            )}
-                            {activationField && (
-                              <button
-                                type="button"
-                                className={`btn ep-icon-btn ${
-                                  isActive
+                              {statusField && (
+                                <button
+                                  type="button"
+                                  className={`btn ep-icon-btn ${isActive ? "ep-icon-btn--disable" : "ep-icon-btn--enable"}`}
+                                  title={isActive ? "Deactivate" : "Activate"}
+                                  onClick={() => handleToggleStatus(row)}
+                                  disabled={rowBusy || saving || !canToggleStatus}
+                                >
+                                  <i
+                                    className={`bi ${isActive ? "bi-toggle-on" : "bi-toggle-off"}`}
+                                  />
+                                </button>
+                              )}
+                              {allowDelete && (
+                                <button
+                                  type="button"
+                                  className="btn ep-icon-btn ep-icon-btn--delete"
+                                  title="Delete"
+                                  onClick={() => handleDelete(row)}
+                                  disabled={rowBusy || saving || !canRemove}
+                                >
+                                  <i className="bi bi-trash3" />
+                                </button>
+                              )}
+                              {activationField && (
+                                <button
+                                  type="button"
+                                  className={`btn ep-icon-btn ${isActive
                                     ? "ep-icon-btn--disable"
                                     : "ep-icon-btn--enable"
-                                }`}
-                                title={isActive ? "Deactivate" : "Activate"}
-                                onClick={() => handleToggleActivation(row)}
-                                disabled={
-                                  rowBusy || saving || !canToggleActivation
-                                }
-                              >
-                                <i
-                                  className={`bi ${
-                                    isActive ? "bi-toggle-on" : "bi-toggle-off"
-                                  }`}
-                                />
-                              </button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-
-            {totalPages > 1 && (
-              <div className="ep-pagination">
-                <button
-                  type="button"
-                  className="ep-page-btn"
-                  disabled={page === 1}
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                >
-                  <i className="bi bi-chevron-left" />
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (p) => (
-                    <button
-                      type="button"
-                      key={p}
-                      className={`ep-page-btn ${page === p ? "ep-page-btn--active" : ""}`}
-                      onClick={() => setPage(p)}
-                    >
-                      {p}
-                    </button>
-                  ),
-                )}
-                <button
-                  type="button"
-                  className="ep-page-btn"
-                  disabled={page === totalPages}
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                >
-                  <i className="bi bi-chevron-right" />
-                </button>
+                                    }`}
+                                  title={isActive ? "Deactivate" : "Activate"}
+                                  onClick={() => handleToggleActivation(row)}
+                                  disabled={
+                                    rowBusy || saving || !canToggleActivation
+                                  }
+                                >
+                                  <i
+                                    className={`bi ${isActive ? "bi-toggle-on" : "bi-toggle-off"
+                                      }`}
+                                  />
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
-            )}
-          </>
-        )}
+
+              {totalPages > 1 && (
+                <div className="ep-pagination">
+                  <button
+                    type="button"
+                    className="ep-page-btn"
+                    disabled={page === 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  >
+                    <i className="bi bi-chevron-left" />
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <button
+                        type="button"
+                        key={p}
+                        className={`ep-page-btn ${page === p ? "ep-page-btn--active" : ""}`}
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </button>
+                    ),
+                  )}
+                  <button
+                    type="button"
+                    className="ep-page-btn"
+                    disabled={page === totalPages}
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  >
+                    <i className="bi bi-chevron-right" />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
       </div>
 
       {modalMode && (
@@ -803,6 +804,6 @@ export default function EntityListPage({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

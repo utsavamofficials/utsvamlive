@@ -72,154 +72,156 @@ export default function DonorManager() {
   const rows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
-    <div className="wrap-content h-auto w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
-      <div className="ep-festive-banner mb-4">
-        <h4 className="fw-bold mb-1 position-relative">
-          <i className="bi bi-person-hearts me-2" />
-          Donors
-        </h4>
-        <p className="mb-0 opacity-90 position-relative">
-          Donors who have contributed to your events. Handle their information
-          carefully.
-        </p>
-      </div>
-
-      <div className="ep-chart-card">
-        <div className="row g-3 align-items-end mb-4">
-          <div className="col-lg-8 col-md-6">
-            <label className="form-label fw-semibold">Search Donors</label>
-            <div className="ep-search-box">
-              <i className="bi bi-search" />
-              <input
-                className="form-control"
-                placeholder="Search by name, phone or email..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              {search && (
-                <button
-                  className="ep-search-clear"
-                  onClick={() => setSearch("")}
-                >
-                  <i className="bi bi-x" />
-                </button>
-              )}
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <button
-              className="btn ep-refresh-btn w-100"
-              onClick={() => load()}
-              disabled={loading}
-            >
-              <i
-                className={`bi ${loading ? "bi-arrow-repeat ep-spin" : "bi-arrow-clockwise"} me-2`}
-              />{" "}
-              Refresh
-            </button>
-          </div>
+    <>
+      <div className="wrap-content h-auto w-100 border-3 border-secondary shadow rounded-5 p-3 p-md-4">
+        <div className="ep-festive-banner mb-4">
+          <h4 className="fw-bold mb-1 position-relative">
+            <i className="bi bi-person-hearts me-2" />
+            Donors
+          </h4>
+          <p className="mb-0 opacity-90 position-relative">
+            Donors who have contributed to your events. Handle their information
+            carefully.
+          </p>
         </div>
 
-        {loading ? (
-          <div className="py-5 text-center text-muted">
-            <span className="spinner-border spinner-border-sm me-2" />
-            Loading donors...
-          </div>
-        ) : loadError ? (
-          <div className="alert alert-danger d-flex justify-content-between align-items-center">
-            <span>
-              <i className="bi bi-exclamation-triangle me-2" />
-              {loadError}
-            </span>
-            <button
-              className="btn btn-sm btn-outline-danger"
-              onClick={() => load()}
-            >
-              Retry
-            </button>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-5 text-muted">
-            <i className="bi bi-inbox display-6 d-block mb-2" />
-            {donors.length === 0
-              ? "No donors recorded yet."
-              : "No donors match your search."}
-          </div>
-        ) : (
-          <>
-            <div className="table-responsive">
-              <table className="table align-middle">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>City</th>
-                    <th>Total Donated</th>
-                    <th className="text-end">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.map((d) =>
-                    d._id ? (
-                      <tr key={d._id}>
-                        <td className="fw-semibold">{d.donorName}</td>
-
-                        <td>{d.contactNumber || "—"}</td>
-
-                        <td>{d.address || "—"}</td>
-
-                        <td>
-                          {d.totalDonationAmount != null
-                            ? `₹${d.totalDonationAmount}`
-                            : "—"}
-                        </td>
-
-                        <td className="text-end">
-                          <button
-                            className="btn ep-icon-btn ep-icon-btn--view"
-                            title="View details"
-                            onClick={() => setSelected(d)}
-                          >
-                            <i className="bi bi-eye" />
-                          </button>
-                        </td>
-                      </tr>
-                    ) : null,
-                  )}
-                </tbody>
-              </table>
-            </div>
-            {totalPages > 1 && (
-              <div className="ep-pagination">
-                <button
-                  className="ep-page-btn"
-                  disabled={page === 1}
-                  onClick={() => setPage(page - 1)}
-                >
-                  <i className="bi bi-chevron-left" />
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (p) => (
-                    <button
-                      key={p}
-                      className={`ep-page-btn ${page === p ? "ep-page-btn--active" : ""}`}
-                      onClick={() => setPage(p)}
-                    >
-                      {p}
-                    </button>
-                  ),
+        <div className="ep-chart-card">
+          <div className="row g-3 align-items-end mb-4">
+            <div className="col-lg-8 col-md-6">
+              <label className="form-label fw-semibold">Search Donors</label>
+              <div className="ep-search-box">
+                <i className="bi bi-search" />
+                <input
+                  className="form-control"
+                  placeholder="Search by name, phone or email..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                {search && (
+                  <button
+                    className="ep-search-clear"
+                    onClick={() => setSearch("")}
+                  >
+                    <i className="bi bi-x" />
+                  </button>
                 )}
-                <button
-                  className="ep-page-btn"
-                  disabled={page === totalPages}
-                  onClick={() => setPage(page + 1)}
-                >
-                  <i className="bi bi-chevron-right" />
-                </button>
               </div>
-            )}
-          </>
-        )}
+            </div>
+            <div className="col-lg-4 col-md-6">
+              <button
+                className="btn ep-refresh-btn w-100"
+                onClick={() => load()}
+                disabled={loading}
+              >
+                <i
+                  className={`bi ${loading ? "bi-arrow-repeat ep-spin" : "bi-arrow-clockwise"} me-2`}
+                />{" "}
+                Refresh
+              </button>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="py-5 text-center text-muted">
+              <span className="spinner-border spinner-border-sm me-2" />
+              Loading donors...
+            </div>
+          ) : loadError ? (
+            <div className="alert alert-danger d-flex justify-content-between align-items-center">
+              <span>
+                <i className="bi bi-exclamation-triangle me-2" />
+                {loadError}
+              </span>
+              <button
+                className="btn btn-sm btn-outline-danger"
+                onClick={() => load()}
+              >
+                Retry
+              </button>
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-5 text-muted">
+              <i className="bi bi-inbox display-6 d-block mb-2" />
+              {donors.length === 0
+                ? "No donors recorded yet."
+                : "No donors match your search."}
+            </div>
+          ) : (
+            <>
+              <div className="table-responsive">
+                <table className="table align-middle">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>City</th>
+                      <th>Total Donated</th>
+                      <th className="text-end">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((d) =>
+                      d._id ? (
+                        <tr key={d._id}>
+                          <td className="fw-semibold">{d.donorName}</td>
+
+                          <td>{d.contactNumber || "—"}</td>
+
+                          <td>{d.address || "—"}</td>
+
+                          <td>
+                            {d.totalDonationAmount != null
+                              ? `₹${d.totalDonationAmount}`
+                              : "—"}
+                          </td>
+
+                          <td className="text-end">
+                            <button
+                              className="btn ep-icon-btn ep-icon-btn--view"
+                              title="View details"
+                              onClick={() => setSelected(d)}
+                            >
+                              <i className="bi bi-eye" />
+                            </button>
+                          </td>
+                        </tr>
+                      ) : null,
+                    )}
+                  </tbody>
+                </table>
+              </div>
+              {totalPages > 1 && (
+                <div className="ep-pagination">
+                  <button
+                    className="ep-page-btn"
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                  >
+                    <i className="bi bi-chevron-left" />
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <button
+                        key={p}
+                        className={`ep-page-btn ${page === p ? "ep-page-btn--active" : ""}`}
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </button>
+                    ),
+                  )}
+                  <button
+                    className="ep-page-btn"
+                    disabled={page === totalPages}
+                    onClick={() => setPage(page + 1)}
+                  >
+                    <i className="bi bi-chevron-right" />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
 
       {selected && (
@@ -283,6 +285,6 @@ export default function DonorManager() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
